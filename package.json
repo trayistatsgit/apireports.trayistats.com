@@ -1,0 +1,25 @@
+{
+  "name": "exposeapi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "start index.js",
+    "dev": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "lodash": "^4.17.21",
+    "mssql": "^11.0.0",
+    "mysql2": "^3.10.1",
+    "nodemon": "^3.1.4",
+    "socket.io": "^4.8.0",
+    "swagger-ui-express": "^5.0.1",
+    "tsqlstring": "^1.0.1",
+    "yamljs": "^0.3.0"
+  }
+}
