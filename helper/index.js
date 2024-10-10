@@ -1,4 +1,4 @@
-const { errors }  =  require('./errors');
+const { errors } = require('./errors');
 
 class Helper {
 
@@ -6,9 +6,9 @@ class Helper {
         let obj = { error: error, data: data };
         if (obj.error) {
             let myResponse = {
-                Success : false,
+                Success: false,
                 Version: "1.0.0",
-                ResponseData : obj.error
+                ResponseData: obj.error
             }
             expressResponse.status(200).send(myResponse)
         } else {
@@ -25,5 +25,5 @@ class Helper {
 
 module.exports = {
     Helper,
-    errors : errors
+    errors: errors
 }

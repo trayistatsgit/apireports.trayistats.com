@@ -1,7 +1,9 @@
 const dashboardDataController = require('./dashboardDataController');
+const supplierController = require('./supplierController');
 
 
-module.exports = 
+module.exports =
 {
-    dashboardDataController
+    dashboardDataController,
+    supplierController
 };
