@@ -59,6 +59,7 @@ class dashboardDataDao {
         return new Promise(async (resolve, reject) => {
             try {
                 let query = `WITH WeeklyRevenue AS (
+    -- Current Week Revenue
     SELECT 
         'CurrentWeek' AS WeekLabel,
         SUM(CASE 
@@ -68,10 +69,12 @@ class dashboardDataDao {
     FROM 
         tsplatform.participants AS p
     WHERE 
-        CAST(p.updatedAt AS DATE) = CAST(GETDATE() AS DATE) -- Get revenue only for today (Monday)
+        DATEPART(WEEK, p.updatedAt) = DATEPART(WEEK, GETDATE())  -- Revenue for the current week
+        AND DATEPART(YEAR, p.updatedAt) = DATEPART(YEAR, GETDATE()) -- Ensure the same year for edge cases (like week 52)
         
     UNION ALL
 
+    -- Last Week Revenue
     SELECT 
         'LastWeek' AS WeekLabel,
         SUM(CASE 
@@ -81,8 +84,8 @@ class dashboardDataDao {
     FROM 
         tsplatform.participants AS p
     WHERE 
-        DATEPART(WEEK, p.updatedAt) = DATEPART(WEEK, DATEADD(WEEK, -1, GETDATE())) 
-        AND DATEPART(YEAR, p.updatedAt) = DATEPART(YEAR, DATEADD(WEEK, -1, GETDATE()))
+        DATEPART(WEEK, p.updatedAt) = DATEPART(WEEK, DATEADD(WEEK, -1, GETDATE())) -- Revenue for last week
+        AND DATEPART(YEAR, p.updatedAt) = DATEPART(YEAR, DATEADD(WEEK, -1, GETDATE())) -- Ensure the same year
 )
 
 SELECT 

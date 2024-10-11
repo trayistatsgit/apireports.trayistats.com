@@ -1,9 +1,9 @@
 const dataBaseDao = require('../databaseDao');
 
 class supplierDataService {
-    async getSupplierData() {
+    async getAllSupplierData() {
         try {
-            const result = await dataBaseDao.getSupplierData.getSupplierDataDao();
+            const result = await dataBaseDao.getSupplierData.getAllSupplierDataDao();
             return { ItemCount: result.length, Records: result }
         } catch (error) {
             throw new Error('Error fetching allocated surveys');
