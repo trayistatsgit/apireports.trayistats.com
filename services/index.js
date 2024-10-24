@@ -1,7 +1,11 @@
 const dashboardDataService = require('./dashboardCurrentDataService');
-const supplierService = require('./supplierDataService')
+const supplierService = require('./supplierDataService');
+const customerService = require('./customerDataService')
+const supplierData = require('./supplierService')
 
 module.exports = {
     dashboardDataService,
-    supplierService
+    supplierService,
+    customerService,
+    supplierData
 }

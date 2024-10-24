@@ -1,11 +1,11 @@
 const errors = require('../helper');
 const { execute } = require('../config/database/querywrapperMysql');
 
-class supplierDataDao {
-    async getAllSupplierDataDao() {
+class customerDataDao {
+    async getAllCustomerDataDao() {
         return new Promise(async (resolve, reject) => {
             try {
-                let query = `Select Name from tsplatform.vendor where isActive = 1 ORDER BY Name ASC`;
+                let query = `Select ClientName from tsplatform.client where isActive = 1 ORDER BY ClientName ASC`;
 
                 let result = await execute(query, [], 1);
                 resolve(result);
@@ -17,4 +17,4 @@ class supplierDataDao {
     }
 }
 
-module.exports = new supplierDataDao();
+module.exports = new customerDataDao();
