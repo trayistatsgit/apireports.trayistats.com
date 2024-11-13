@@ -3,6 +3,7 @@ const router = express.Router();
 
 const controller = require("../controllers");
 
+router.post('/api/V1/login', controller.loginController.loginUser);
 router.get('/api/V1/currentDashboardData', controller.dashboardDataController.getDashboardCurrentData);
 router.get('/api/V1/monthWiseRevenue', controller.dashboardDataController.getmonthWiseRevenue);
 router.get('/api/V1/weeklyRevenue', controller.dashboardDataController.getweeklyRevenue);
