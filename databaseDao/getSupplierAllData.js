@@ -18,39 +18,15 @@ class getSupplierAllData {
     async getSupplierReconcilationDataDao() {
         return new Promise(async (resolve, reject) => {
             try {
-                let query = `WITH Counts AS (
-    SELECT 
-        COUNT(id) AS total_count
-    FROM 
-        tsplatform.participants 
-    WHERE 
-        pstatus = 1 
-        AND CreatedAt BETWEEN 
-            DATEADD(DAY, 1 - DAY(EOMONTH(GETDATE(), -1)), EOMONTH(GETDATE(), -1)) 
-            AND EOMONTH(GETDATE(), -1)
-),
-StatusSum AS (
-    SELECT 
-        SUM(CASE 
-                WHEN pstatus != 1 AND finalstatus = 31 THEN 1
-                WHEN pstatus = 1 AND finalstatus = 25 THEN -1
-                ELSE 0
-            END) AS status_sum
-    FROM 
-        tsplatform.participants 
-    WHERE 
-        CreatedAt BETWEEN 
-            DATEADD(DAY, 1 - DAY(EOMONTH(GETDATE(), -1)), EOMONTH(GETDATE(), -1)) 
-            AND EOMONTH(GETDATE(), -1)
-)
-SELECT 
-    COALESCE((CAST(ss.status_sum AS FLOAT) / c.total_count) * 100, 0) AS reconcile_percentage
-FROM 
-    Counts c
-CROSS JOIN 
-    StatusSum ss;`
-
-
+                let query = `SELECT 
+                                (CAST(
+                                    COUNT(CASE WHEN finalstatus = 25 THEN 1 END) AS FLOAT
+                                ) / COUNT(*)) * 100 AS reconcile_percentage
+                            FROM tsplatform.participants 
+                            WHERE 
+                                PStatus = 1 
+                                AND CreatedAt >= DATEADD(MONTH, DATEDIFF(MONTH, 0, GETDATE()) - 1, 0)
+                                AND CreatedAt < DATEADD(MONTH, DATEDIFF(MONTH, 0, GETDATE()), 0)`
 
                 let result = await execute(query, [], 1);
                 resolve(result);
