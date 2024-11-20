@@ -3,6 +3,7 @@ const getDashboardData = require('./dashboardDataDao');
 const common = require('./common/verifyVendor');
 const getSupplierData = require('./supplierDataDao');
 const getCustomerData = require('./customerDataDao');
+const getLanguageData = require('./languageDataDao');;
 const getSupplierAllData = require('./getSupplierAllData');
 
 module.exports = {
@@ -10,6 +11,7 @@ module.exports = {
     getDashboardData,
     getSupplierData,
     getCustomerData,
+    getLanguageData,
     getSupplierAllData,
     common
 };

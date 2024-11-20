@@ -3,6 +3,7 @@ const dashboardDataController = require('./dashboardDataController');
 const supplierController = require('./supplierController');
 const customerController = require('./customerController');
 const supplierDataController = require('./supplierDataController');
+const languageController = require('./languageController');
 
 
 module.exports =
@@ -11,5 +12,6 @@ module.exports =
     dashboardDataController,
     supplierController,
     customerController,
+    languageController,
     supplierDataController
 };
